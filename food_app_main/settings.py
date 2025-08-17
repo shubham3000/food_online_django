@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_h@2z)r%fsn5w2yfksq33h%^zuj35%i9jo!#&k_sg3d5)sqs-*'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -82,10 +83,10 @@ WSGI_APPLICATION = 'food_app_main.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "shubham30",
-        "HOST": "127.0.0.1",
+        "NAME": config('POSTGRESDBNAME'),
+        "USER": config('POSTGRESUSER'),
+        "PASSWORD": config('POSTGRESPASSWORD'),
+        "HOST": config('POSTGRESHOST'),
         "PORT": "5432",
     }
 }
@@ -128,7 +129,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = [
-    BASE_DIR / 'mysite/static',
+    BASE_DIR / 'food_app_main/static',
 ]
 
 
